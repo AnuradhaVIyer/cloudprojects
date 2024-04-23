@@ -5,8 +5,8 @@ This repository contains various automation scripts and templates for provisioni
 ## Projects
 
 1. **[create-admin-set-budget-email](./create-admin-set-budget-email)**
-   - [create-admin-set-budget-email.yaml](./aws-create-admin-set-budget-email/create-admin-set-budget-email.yaml)
-   - [README.md](./aws-create-admin-set-budget-email/README.md)
+   - [create-admin-set-budget-email.yaml](./create-admin-set-budget-email/create-admin-set-budget-email.yaml)
+   - [README.md](./create-admin-set-budget-email/README.md)
 
    This project provides a CloudFormation, TerraForm templates, Python, Lambda, bash, bat scripts and instructions for automating tasks in a new AWS account, including creating an administrator user, setting up a monthly cost budget, and enabling MFA for the root user.
 
