@@ -1,0 +1,82 @@
+# File: create-admin-set-budget-email.yaml
+
+# This CloudFormation template performs the following tasks:
+
+# Creates an IAM user with the specified AdminUserName and attaches the AdministratorAccess policy to it.
+# You'll need to replace YOUR_SECURE_PASSWORD with a strong password for the administrator user.
+
+# Sets up an AWS Budget with a monthly cost budget limit specified by the BudgetAmount parameter.
+# It configures email notifications to be sent to the BudgetEmail address when the actual costs exceed 80% of the budget.
+
+# Outputs the AdminUserName and the login URL for the AWS Management Console.
+
+# Note that it includes comments for the manual steps that need to be performed:
+# - Verify that your account information is accurate.
+# - Activate MFA for your root user.
+
+# To use this CloudFormation template, you'll need to provide the required parameter values when creating the stack,
+# either through the AWS Management Console or the AWS CLI.
+
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create Administrator, set budget and setup email notofication for new AWS account
+
+Parameters:
+  AdminUserName:
+    Type: String
+    Description: Name for the administrator user
+  AdminUserEmail:
+    Type: String
+    Description: Email address for the administrator user
+  BudgetAmount:
+    Type: Number
+    Description: Monthly budget amount in USD
+  BudgetEmail:
+    Type: String
+    Description: Email address to receive budget notifications
+
+  # 1. Verify that your account information is accurate
+  # This step needs to be performed manually
+
+  # 2. Create an administrator user to perform daily tasks
+Resources:
+  AdminUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Ref AdminUserName
+      LoginProfile:
+        Password: YOUR_SECURE_PASSWORD
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+
+  # Activate MFA for your root user
+  # This step needs to be performed manually
+
+  # 3. Set up a cost budget with notifications using AWS Budgets
+  Budget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit:
+          Amount: !Ref BudgetAmount
+          Unit: USD
+        BudgetName: Monthly-Cost-Budget
+      NotificationsWithSubscribers:
+        - Notification:
+            ComparisonOperator: GREATER_THAN
+            NotificationType: ACTUAL
+            Threshold: 80
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: !Ref BudgetEmail
+
+Outputs:
+  AdminUserName:
+    Value: !Ref AdminUserName
+    Description: Administrator user name
+  AdminUserLoginURL:
+    Value: !Sub "https://${AWS::AccountId}.signin.aws.amazon.com/console"
+    Description: URL for the administrator user to log in to the AWS Management Console
