@@ -1,3 +1,6 @@
+REM File: create-admin-set-budget-email.bat
+REM Author: Anuradha Iyer
+
 REM This batch file does the following:
 
 REM Sets the AWS CLI profile (if needed) using the AWS_PROFILE environment variable.
