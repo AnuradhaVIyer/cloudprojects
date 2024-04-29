@@ -1,4 +1,5 @@
 # File: create-admin-set-budget-email.py
+# Author: Anuradha Iyer
 
 # This Python script uses the AWS SDK for Python (Boto3) to automate following tasks:
 
