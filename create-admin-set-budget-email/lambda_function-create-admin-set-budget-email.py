@@ -1,4 +1,5 @@
 # File: lambda_function.py
+# Author: Anuradha Iyer
 
 # This Python file contains the Lambda function code for automating following tasks:
 
