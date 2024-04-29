@@ -1,4 +1,5 @@
 # File: create-admin-set-budget-email.tf
+# Author: Anuradha Iyer
 
 # This Terraform configuration file defines the resources and variables required for automating tasks in a new AWS account.
 
