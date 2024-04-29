@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # File: create-admin-set-budget-email.sh
+# Author: Anuradha Iyer
+
 # This Bash script automates tasks using the AWS CLI on Linux or macOS systems.
 
 
